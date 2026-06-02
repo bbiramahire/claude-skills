@@ -1,13 +1,14 @@
 # claude-skills
 
-A small collection of [Claude Code](https://claude.com/claude-code) skills focused on **bootstrapping project documentation properly** before any code is written.
+A small collection of opinionated [Claude Code](https://claude.com/claude-code) skills.
 
 | Skill | Use it when |
 |---|---|
 | [`init-project-docs`](./init-project-docs) | Starting a real, multi-component project that needs a full documentation suite — architecture, data, API, security, operations, AI navigation. Generates a 22-file doc tree across 7 folders. |
 | [`init-project-lite`](./init-project-lite) | Starting a small or medium project — single service, MVP, side project, internal tool. Same conceptual coverage as `init-project-docs`, but folded into 5 files instead of 22. |
+| [`repo-malware-sweep`](./repo-malware-sweep) | A developer/org may be hit by a PolinRider-class supply-chain compromise — an obfuscated loader injected into build config files, fake fonts, or `.vscode` auto-run tasks and pushed across every repo a stolen credential can reach. Runs containment-first IR: rotate creds, sweep every org on fresh origin, report per-owner, remediate with reviewable diffs. |
 
-Both skills share the same discipline: **interrogate first, generate second, verify last**. They differ only in output footprint.
+The two `init-project-*` skills share one discipline: **interrogate first, generate second, verify last**. `repo-malware-sweep` is a security/incident-response skill with its own **containment-first** discipline: **rotate credentials before you scan, scan fresh origin, remediate only with authorization.**
 
 ---
 
@@ -20,6 +21,7 @@ git clone https://github.com/bbiramahire/claude-skills.git
 mkdir -p ~/.claude/skills
 cp -r claude-skills/init-project-lite ~/.claude/skills/
 cp -r claude-skills/init-project-docs ~/.claude/skills/
+cp -r claude-skills/repo-malware-sweep ~/.claude/skills/
 ```
 
 Or symlink them so you can `git pull` updates:
@@ -29,6 +31,7 @@ git clone https://github.com/bbiramahire/claude-skills.git ~/Developer/claude-sk
 mkdir -p ~/.claude/skills
 ln -s ~/Developer/claude-skills/init-project-lite ~/.claude/skills/init-project-lite
 ln -s ~/Developer/claude-skills/init-project-docs ~/.claude/skills/init-project-docs
+ln -s ~/Developer/claude-skills/repo-malware-sweep ~/.claude/skills/repo-malware-sweep
 ```
 
 Restart Claude Code (or open a new session). The skills will appear in the available-skills list and can be invoked as `/init-project-docs` or `/init-project-lite`.
